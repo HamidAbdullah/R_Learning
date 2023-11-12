@@ -4,28 +4,20 @@
  * @format
  */
 
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+const Stack = createNativeStackNavigator();
 
-function App(): JSX.Element {
+function App() {
   return (
-    <View style={styles.sectionContainer}>
-      <Text style={styles.highlight}>Hello World.</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  highlight: {
-    fontWeight: '700',
-    fontSize: 30,
-    textAlign: 'center',
-  },
-});
 
 export default App;
