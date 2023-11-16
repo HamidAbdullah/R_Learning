@@ -14,6 +14,8 @@ export type PropsType = {
     iconSize: number,
     handleOnPressRight: () => {},
     handleOnPressLeft: () => {},
+    isShowRight: boolean,
+    rigtSideText: string,   
 }
  
 const CustomHeader = (props: PropsType) => {
@@ -28,6 +30,8 @@ const CustomHeader = (props: PropsType) => {
         iconColor = '#000',
         handleOnPressRight = () => {},
         handleOnPressLeft = () => {},
+        isShowRight = true,
+        rigtSideText = '',
 
     } = props;
 
@@ -42,7 +46,6 @@ const CustomHeader = (props: PropsType) => {
                     iconType={leftIconType}
                     iconSize={iconSize}
                     iconColor={iconColor}
-                    isShowRight = {true}
                 />
             </TouchableOpacity>
         );
@@ -50,7 +53,7 @@ const CustomHeader = (props: PropsType) => {
     };
 
     const renderRightIcon = () => {
-
+        if (isShowRight) {
         return (
             <TouchableOpacity 
                 onPress={handleOnPressRight}
@@ -64,6 +67,11 @@ const CustomHeader = (props: PropsType) => {
                 />
             </TouchableOpacity>
         );
+        } else {
+        return <View style={styles.backContainerStyle} >
+            <Text style={styles.rightTextStyle}>{rigtSideText}</Text>
+        </View>;
+      }
 
     };
 

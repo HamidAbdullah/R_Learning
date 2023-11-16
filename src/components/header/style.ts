@@ -2,17 +2,21 @@ import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
-    backgroundColor:'#fff',
+    height: 70,
+    backgroundColor:'#ffff',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
   text: {
       color: 'black',
-      fontSize: 15,
-      textTransform: 'uppercase',
+      fontSize: 25,
       fontWeight:'600'
+  },
+  rightTextStyle: {
+    color: 'green',
+    fontSize: 18,
+    fontWeight: '300',
   },
   menuIcon: {
     fontSize: 35,
