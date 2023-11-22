@@ -10,6 +10,7 @@ type TextInputTypes =  {
     customInput: any,
     customContainerInput: any,
     multiline: any,
+    secureTextEntry: boolean,
 }
 
 function CustomTextInput(props: TextInputTypes) {
@@ -21,6 +22,7 @@ function CustomTextInput(props: TextInputTypes) {
     customInput,
     customContainerInput,
     multiline,
+    secureTextEntry = false,
   } = props || {};
   return (
     <View style={[styles.inputContainer, customContainerInput]}>
@@ -31,6 +33,7 @@ function CustomTextInput(props: TextInputTypes) {
         value={value}
         onChangeText={onChangeText}
         placeholderTextColor={placeholderTextColor}
+        secureTextEntry = {secureTextEntry}
       />
     </View>
   );

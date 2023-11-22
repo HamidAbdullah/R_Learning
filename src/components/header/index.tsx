@@ -69,7 +69,7 @@ const CustomHeader = (props: PropsType) => {
         );
         } else {
         return <View style={styles.backContainerStyle} >
-            <Text style={styles.rightTextStyle}>{rigtSideText}</Text>
+            <Text style={styles.rightTextStyle} onPress={handleOnPressRight}>{rigtSideText}</Text>
         </View>;
       }
 
