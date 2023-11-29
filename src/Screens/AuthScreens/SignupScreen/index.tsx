@@ -19,9 +19,13 @@ import CustomHeader from '../../../components/header';
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailFormateError, setEmailFormateError] = useState('');
+
   const navigation = useNavigation();
 
   const authContext = useContext(AuthContext);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 
   if (!authContext) {
     return <Text>Error: AuthContext is not defined</Text>;
@@ -29,8 +33,21 @@ const SignUpScreen = () => {
 
   const { register, signupError, setSignupError } = authContext;
 
+  const handleSignUp = () => {
+    if (!emailRegex.test(email)) {
+      setEmailFormateError('Email format is incorrect');
+      return;
+    }
+
+    setEmailFormateError(''); 
+
+    register({ email, password });
+  };
+
+
   const handleInputChange = (text: any) => {
     setEmail(text);
+
     if (signupError) {
       setSignupError(null);
     }
@@ -47,7 +64,7 @@ const SignUpScreen = () => {
       <CustomHeader
         title='Sign Up'
         isShowRight={false}
-        leftIconName=''
+        iconColor='#fff'
       />
       <View style={styles.signupFormView}>
 
@@ -58,20 +75,30 @@ const SignUpScreen = () => {
           keyboardType="email-address"
           autoCorrect={false}
           placeholderTextColor="#000"
-          />
+        />
+        
+        <View>
+          {emailFormateError !== '' && (
+            <Text style={styles.loginError}>
+              {emailFormateError}
+            </Text>
+          )}
+        </View>
 
         <CustomTextInput
           placeholder="Create Password"
           placeholderTextColor="#000"
           onChangeText={handlePasswordChange}
           value={password}
-          autoCorrect={false} />
+          autoCorrect={false}
+          secureTextEntry = {true}
+        />
 
-        {signupError && <Text style={{ color: 'red' }}>{signupError}</Text>}
+        {signupError && <Text style={{ color: 'red', textAlign: 'center' }}>{signupError}</Text>}
         <View style={styles.signinButtonContainer}>
           <CustomButton
             title='Sign Up'
-            onPress={() => register({ email, password })}
+            onPress={handleSignUp}
           />
 
         </View>

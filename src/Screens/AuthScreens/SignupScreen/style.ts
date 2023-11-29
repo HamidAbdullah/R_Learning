@@ -38,6 +38,11 @@ const styles = StyleSheet.create({
   signinButtonContainer: {
     borderRadius: 15,
   },
+  loginError: {
+    color: 'red',
+    textAlign: 'center',
+    fontSize: 15,
+  },
 
   upperSignupText: {
     textAlign: 'center',

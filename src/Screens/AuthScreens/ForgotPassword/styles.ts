@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   containerView: {
@@ -62,6 +62,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#0B7EE885',
     padding: 10,
     borderRadius: 10,
+  },
+  loginError: {
+    color: 'red',
+    textAlign: 'center',
+    fontSize: 15,
+    marginVertical: 30,
   },
 });
 export default styles;

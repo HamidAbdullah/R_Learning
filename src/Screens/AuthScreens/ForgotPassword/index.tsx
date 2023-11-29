@@ -19,9 +19,11 @@ import { SCREEN_DIMENSIONS } from '../../../constants/iconTyps';
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
+  const [emailFormateError, setEmailFormateError] = useState('');
   const navigation = useNavigation();
 
   const authContext = useContext(AuthContext);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!authContext) {
     return <Text>Error: AuthContext is not defined</Text>;
@@ -30,13 +32,19 @@ const SignUpScreen = () => {
   const { resetPassword } = authContext;
 
   const handleResetPassword = async () => {
-    try {
-      await resetPassword(email);
-      Alert.alert('Success', 'Password Reset Email sent successfully', [
-        { text: 'OK', onPress: () => navigation.navigate('Login' as never) },
-      ]);
-    } catch (err) {
-      console.error(err);
+    if (!emailRegex.test(email)) {
+      console.log('Email format is incorrect');
+      setEmailFormateError('Email format is incorrect');
+      return;
+    } else {
+      try {
+        await resetPassword(email);
+        Alert.alert('Success', 'Password Reset Email sent successfully', [
+          { text: 'OK', onPress: () => navigation.navigate('Login' as never) },
+        ]);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
@@ -48,23 +56,30 @@ const SignUpScreen = () => {
         title='Forget Password'
       />
       <View style={{
-        marginTop: SCREEN_DIMENSIONS.height/4-100,
+        marginTop: SCREEN_DIMENSIONS.height / 4 - 100,
       }}>
-      <CustomTextInput
-        value={email}
-        placeholder="Enter your Email"
-        onChangeText={userEmail => setEmail(userEmail)}
-        keyboardType="email-address"
-        autoCorrect={false}
-        placeholderTextColor="#000"
-      />
-      <View style={styles.signinButtonContainer}>
-        <CustomButton
-          title='Forget Password'
-          onPress={handleResetPassword}
-          disabled = {!email}
+        <CustomTextInput
+          value={email}
+          placeholder="Enter your Email"
+          onChangeText={userEmail => setEmail(userEmail)}
+          keyboardType="email-address"
+          autoCorrect={false}
+          placeholderTextColor="#000"
         />
-      </View>
+        <View>
+          {emailFormateError !== '' && (
+            <Text style={styles.loginError}>
+              {emailFormateError}
+            </Text>
+          )}
+        </View>
+        <View style={styles.signinButtonContainer}>
+          <CustomButton
+            title='Forget Password'
+            onPress={handleResetPassword}
+            disabled={!email}
+          />
+        </View>
       </View>
       <View>
         <Text style={styles.upperSignupText}
