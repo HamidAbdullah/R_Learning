@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export const ICON_TYPES = {
     AntDesign: 'AntDesign',
     IonIcons: 'Ionicons',
@@ -13,3 +15,5 @@ export const ICON_TYPES = {
     Fontisto: 'Fontisto',
   };
   
+
+  export const SCREEN_DIMENSIONS = Dimensions.get('screen');

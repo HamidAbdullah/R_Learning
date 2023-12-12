@@ -13,7 +13,7 @@ function CustomButton(props: any) {
         disabled,
         buttonStyleWrapper,
         loading,
-        titleStyle
+        titleStyle,
     } = props || {};
 
 

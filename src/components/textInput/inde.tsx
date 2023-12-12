@@ -1,16 +1,19 @@
 import React from 'react';
-import {View,TextInput} from 'react-native';
+import { View, TextInput, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import styles from './style';
 
-type TextInputTypes =  {
-    placeholder : string,
-    value: string,
-    onChangeText: any,
-    placeholderTextColor: string,
-    customInput: any,
-    customContainerInput: any,
-    multiline: any,
-}
+type TextInputTypes = {
+  placeholder: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholderTextColor: string;
+  customInput?: StyleProp<TextStyle>;
+  customContainerInput?: StyleProp<ViewStyle>;
+  multiline?: boolean;
+  secureTextEntry?: boolean;
+  keyboardType?: any;
+  autoCorrect?: boolean;
+};
 
 function CustomTextInput(props: TextInputTypes) {
   const {
@@ -21,7 +24,11 @@ function CustomTextInput(props: TextInputTypes) {
     customInput,
     customContainerInput,
     multiline,
+    secureTextEntry = false,
+    keyboardType,
+    autoCorrect = false,
   } = props || {};
+
   return (
     <View style={[styles.inputContainer, customContainerInput]}>
       <TextInput
@@ -31,6 +38,9 @@ function CustomTextInput(props: TextInputTypes) {
         value={value}
         onChangeText={onChangeText}
         placeholderTextColor={placeholderTextColor}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        autoCorrect={autoCorrect}
       />
     </View>
   );
